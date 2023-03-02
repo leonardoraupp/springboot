@@ -1,15 +1,38 @@
 package br.com.springboot.model;
 
+import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
+/*
+Foram criados os dados(variáveis) da classe que serão persistidos no BD
+Foram criados o métodos de definição e acesso(Getters and Setters)
+Foi inserido os pacotes JPA(Hibernate) e MySQL Conector
+Foi feito o mapeamento objeto relacional
+Foi Feito uma interfae CRUD
+Foi Criado uma ClienteDAO que segue a interface CRUD(Que é responsável por persistir os dados da entidade Cliente)
+*/
+@Entity
+@Table(name="clientes")
 public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, length = 50)
     private String nome;
+    @Column(length = 11)
     private String cpf;
+    @Column(name = "data_nascimento",columnDefinition = "DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataDeNascimento;
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
+    @Column(length = 10)
     private String telefone;
+    @Column(length = 11)
     private String celular;
+    @Column(length = 50)
     private String email;
     private String ativo;
 
